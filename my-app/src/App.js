@@ -1,40 +1,41 @@
-import logo from './logo.svg';
+// Import Dependencies
 import './App.css';
-import { Content } from './components/content';
-import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Navbar, Nav, Container} from 'react-bootstrap';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
+// Import Components
+import { Content } from './components/content'
+import { View } from './components/view'
+import { EditProject } from './components/editProject'
+
+// Function to Render App
 function App() {
+  // Render Application
   return (
-    <Router>
-      <div className="App">
+    <div className="App">
+      <Router>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
           <Container>
-          <Navbar.Brand href="#home">My App</Navbar.Brand>
+          <Navbar.Brand href="/">My App</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className='me-auto'>
-              <Nav.Link href="#read">Read</Nav.Link>
-              <Nav.Link href="#create">Create</Nav.Link>
-              <NavDropdown title="Dropdown" id="collapsible-nav-dropdown">
-                <NavDropdown.Item href="#action/1">Action 1</NavDropdown.Item>
-                <NavDropdown.Item href="#action/2">Action 2</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3">Action 3</NavDropdown.Item>
-              </NavDropdown>
+              <Nav.Link href="/projects">View Projects</Nav.Link>
+              <Nav.Link href="/projects/add">Add</Nav.Link>
             </Nav>
           </Navbar.Collapse>
           </Container>
         </Navbar>
         <br/>
-        <Routes>
-          <Route path='#home' element={<Content/>} />
-          <Route path='#read' element={<Content/>}/>
-          <Route path='#create' element={<Content/>}/>
-          <Route/>
-        </Routes>
-      </div>
-    </Router>
-    
+        {/* Routing */}
+        <Switch>
+          <Route path="/" exact><Content/></Route>
+          <Route path="/projects"><View/></Route>
+          <Route path={"/projects/add"}><Content/></Route>
+          <Route path={"/projects/:id"}><EditProject/></Route>
+        </Switch>
+      </Router>
+    </div>
   );
 }
 
