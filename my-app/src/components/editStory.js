@@ -1,51 +1,54 @@
-// Import Local Dependencies
+// Import local dependencies
 import React, { useEffect, useState } from 'react'
 import Popup from 'reactjs-popup'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 
-// Edit Existing Project
-export function EditProjectPopup(){
-    // Variable declaration
+// Edit Story Popup Hook
+export function EditStoryPopup(){
     const [open, setOpen] = useState(false)
-    const [name, setName] = useState('')
+    const [story, setStory] = useState('')
+    const [score, setScore] = useState(0)
 
+    // Component Did Mount for React Hooks
     useEffect(() => {
-        // Log Task
-        console.log("Editing: " + this.props.project.id)
-        // Get Project Details
-        axios.get('http://localhost:4000/projects/' + this.props.project.id)
-            // Listen for completion
+        console.log(this.props.card.id)
+
+        axios.get('http://localhost:4000/story/' + this.props.card.id)
+            // Listen for Completion
             .then((result) => {
                 // Log Result
-                console.log(result.data)
-                setName(result.data.name)
+                console.log(result)
+                // Update State Values
+                setStory(result.data.name)
+                setScore(result.data.score)
             })
-            // Listen for error
+            // Listen for Error
             .catch((error) => {
                 // Log Error
                 console.log(error)
             })
     })
-    // Close Popup expression
+    // Close Popup lambda expression
     const closePopup = () => setOpen(false)
-    // Update Project expression
+    // Update Data lambda expression
     const updateData = () => {
-        // Log Task
-        console.log("Finished Editing: " + this.props.project.id)
+        // Log Process
+        console.log("Updating:" + this.props.card.id)
         // Edit Object
-        const projectEdit = {
-            name: name
+        const storyEdit = {
+            story: story,
+            score: score
         }
-        // Send Project details to MongoDB server to be updated
-        axios.put('http://localhost:4000/projects/' + this.props.project.id, projectEdit)
-            // Listen for completion
+        // Call Update Function from localhost server
+        axios.put('http://localhost:4000/story/' + this.props.card.id, storyEdit)
+            // Listen for Completion
             .then((result) => {
                 // Log Result
                 console.log(result)
             })
-            // Listen for error
-            .then((error) => {
+            // Listen for Error
+            .catch((error) => {
                 // Log Error
                 console.log(error)
             })
@@ -68,23 +71,31 @@ export function EditProjectPopup(){
                     // Close Popup
                     closePopup()
                 }} >
-                    {/* Name Input Form */}
+                    {/* Story Input Form */}
                     <div className='d-flex justify-content-center'>
                         {/* Label */}
-                        <h4>Project Title:</h4>
+                        <h4>Story</h4>
                     </div>
-                    {/* Name Input */}
+                    {/* Story Input */}
                     <input type='text'
                             className='form-control'
-                            value={name}
+                            value={story}
                             onChange={(element) => {
-                                setName(element.target.value)
+                                setStory(element.target.value)
                             }}/>
                     {/* Score Input Form */}
                     <div className='d-flex justify-content-center'>
                         {/* Label */}
                         <h4>Score</h4>
                     </div>
+                    {/* Score Input */}
+                    <input type='text'
+                            className='form-control'
+                            value={story}
+                            onChange={(element) => {
+                                setScore(element.target.value)
+                            }}/>
+                    <br/>
                     <div className='d-flex justify-content-center'>
                         {/* Form Submission */}
                         <Button variant="outline-success" type='submit'> Add</Button>

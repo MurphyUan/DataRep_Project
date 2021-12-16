@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 // Import Components
 import { Content } from './components/content'
 import { View } from './components/view'
-import { EditProject } from './components/editProject'
+import { EditProjectPopup } from './components/editProject'
 
 // Function to Render App
 function App() {
@@ -32,7 +32,7 @@ function App() {
           <Route path="/" exact><Content/></Route>
           <Route path="/projects"><View/></Route>
           <Route path={"/projects/add"}><Content/></Route>
-          <Route path={"/projects/:id"}><EditProject/></Route>
+          <Route path={"/projects/:id"}><EditProjectPopup/></Route>
         </Switch>
       </Router>
     </div>

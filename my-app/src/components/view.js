@@ -2,7 +2,7 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import { Project } from './project'
-import { CreateProjectPopup } from './popups'
+import { CreateProjectPopup } from './createProject'
 
 // Home Class
 export class View extends Component{
@@ -24,10 +24,14 @@ export class View extends Component{
     RefreshInfo(){
         // Perform get request to server
         axios.get('http://localhost:4000/projects')
+        // Listen for Completion
         .then((res)=>{
+            // Update state variable
             this.setState({ projects: res.data})
         })
+        // Listen for Error
         .catch((error) => {
+            // Log Error
             console.log(error)
         })
     }

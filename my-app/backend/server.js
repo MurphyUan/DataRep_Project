@@ -108,14 +108,13 @@ app.post('/projects/add', (req, res) => {
     console.log("New Project: " + req.body.name)
     // Add new document to MongoDB
     projectModel.create({
-        name: req.body.name,
-        cards: req.body.cards
+        name: req.body.name
     })
 })
 
 app.delete('/projects/:id', (req, res) => {
     // Log Delete Request
-    console.log("Delete Movie: " + req.params.id)
+    console.log("Delete Project: " + req.params.id)
     // Search MongoDB & Delete with respect to :id
     projectModel.findByIdAndDelete(req.params.id, (error, result) => {
         if(error)res.send(error)

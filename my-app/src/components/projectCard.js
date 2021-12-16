@@ -17,14 +17,16 @@ export class ProjectCard extends Component{
         console.log("Delete "+this.props.card._id)
 
         axios.delete("http://localhost:4000/projects/" + this.props.card._id)
-        .then(()=>{
-            // Reload page once server has sent request and recieved confirmation
-            this.props.ReloadPage()
-        })
-        .catch((error) => {
-            // Log Error
-            console.log(error)
-        })
+            // Listen for completion
+            .then(()=>{
+                // Reload page once server has sent request and recieved confirmation
+                this.props.ReloadPage()
+            })
+            // Listen for Error
+            .catch((error) => {
+                // Log Error
+                console.log(error)
+            })
     }
 
     render(){
