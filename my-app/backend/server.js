@@ -3,7 +3,6 @@ const express = require('express')
 const path = require('path')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
-const cors = require('cors');
 
 //Initialise Server
 const app = express()
@@ -38,17 +37,6 @@ app.use(bodyParser.urlencoded({extended:false}))
 
 // Parse json
 app.use(bodyParser.json())
-
-// Use Cross-Origin Resource Sharing
-// app.use(cors())
-
-// // Avoid CORS Errors when communicating between web applications
-// app.use((req, res, next)=>{
-//     res.header("Access-Control-Allow-Origin","*")
-//     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-//     next()
-// })
 
 //Connect to MongoDB Server through Mongoose
 async function connect(){

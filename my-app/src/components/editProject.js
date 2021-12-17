@@ -1,5 +1,5 @@
 // Import Local Dependencies
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import Popup from 'reactjs-popup'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'

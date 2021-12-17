@@ -40,8 +40,10 @@ export class View extends Component{
         //return HTML
         return (
             <div>
+                {/* Create Project Screen */}
                 <CreateProjectPopup/>
                 <br/>
+                {/* List all Projects on the screen */}
                 <Project projects={this.state.projects} ReloadPage={this.RefreshInfo}></Project>
             </div>
         )

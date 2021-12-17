@@ -9,6 +9,7 @@ export class Story extends Component{
         return this.props.stories.map((element) => {
             // Map each element to a new StoryCard
             return(
+                // Display Single Card Element
                 <StoryCard card={element} ReloadData={this.props.ReloadData}></StoryCard>
             )
         })

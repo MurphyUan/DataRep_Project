@@ -10,6 +10,7 @@ export class Project extends Component {
             // Map each element to a new Project Card
             return (
                 <div>
+                    {/* Display Single Card Element */}
                     <ProjectCard card = {element} ReloadPage={this.props.ReloadPage}></ProjectCard>
                     <br/>
                 </div>

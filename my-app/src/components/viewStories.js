@@ -3,7 +3,6 @@ import axios from 'axios'
 import React, { Component } from 'react'
 import { Story } from './story'
 import { CreateStoryPopup } from './createStory'
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 import { EditProjectPopup } from './editProject';
 
 export class ViewStories extends Component{
@@ -37,6 +36,7 @@ export class ViewStories extends Component{
             .then((result) => {
                 // Check if result is in dataformat we want
                 console.log(result)
+                // Validate Data
                 if(result.data != undefined){
                     // Update state variable
                     this.setState({ 
@@ -56,14 +56,17 @@ export class ViewStories extends Component{
         axios.get('http://localhost:4000/projects/' + this.props.match.params.id)
             // Listen for Completion
             .then((result) => {
+                // Log Result
                 console.log(result.data)
+                // Update State
                 this.setState({
                     id: result.data._id,
                     name: result.data.name
                 })
             })
-            // Log Errors
+            // Listen For Errors
             .catch((error) => {
+                // Log Error
                 console.log(error)
             })
     }
@@ -71,11 +74,14 @@ export class ViewStories extends Component{
     render(){
         return(
             <div>
+                {/* Edit Screen For Project */}
                 <EditProjectPopup _id={this.state.id} name={this.state.name}/>
+                {/* Add New Story Screen */}
                 <CreateStoryPopup id={this.props.match.params.id}/>
                 <br/>
+                {/* List of stories associated with Project */}
                 <Story stories={this.state.stories} ReloadData={this.ReloadData}/>
-                {/* <StoryCard card={this.state.exampleStory} ReloadData={this.ReloadData}/> */}
+                
             </div>
         )
     }
