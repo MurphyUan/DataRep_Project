@@ -36,7 +36,7 @@ export function CreateProjectPopup(){
                 {/* PlaceHolder Button */}
                 <Button variant='outline-success' onClick={() => {
                     setOpen(true)
-                    }}> Add 
+                    }}> Add New Project Timeline
                 </Button>
                 {/* Popup */}
                 <Popup open={open} closeOnDocumentClick onClose={closePopup}>

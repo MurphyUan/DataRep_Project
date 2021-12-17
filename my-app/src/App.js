@@ -4,9 +4,9 @@ import { Navbar, Nav, Container} from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // Import Components
-import { Content } from './components/content'
 import { View } from './components/view'
-import { EditProjectPopup } from './components/editProject'
+import { ViewStories } from './components/viewStories'
+import { Welcome } from './components/hello';
 
 // Function to Render App
 function App() {
@@ -16,12 +16,11 @@ function App() {
       <Router>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
           <Container>
-          <Navbar.Brand href="/">My App</Navbar.Brand>
+          <Navbar.Brand href="/">Projects & Stories</Navbar.Brand>
           <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className='me-auto'>
               <Nav.Link href="/projects">View Projects</Nav.Link>
-              <Nav.Link href="/projects/add">Add</Nav.Link>
             </Nav>
           </Navbar.Collapse>
           </Container>
@@ -29,12 +28,12 @@ function App() {
         <br/>
         {/* Routing */}
         <Switch>
-          <Route path="/" exact><Content/></Route>
+          <Route path="/" exact><Welcome/></Route>
+          <Route path={"/projects/:id"} component={ViewStories}></Route>
           <Route path="/projects"><View/></Route>
-          <Route path={"/projects/add"}><Content/></Route>
-          <Route path={"/projects/:id"}><EditProjectPopup/></Route>
         </Switch>
       </Router>
+      <footer>&copy;G00385338</footer>
     </div>
   );
 }

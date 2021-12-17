@@ -25,9 +25,9 @@ export class View extends Component{
         // Perform get request to server
         axios.get('http://localhost:4000/projects')
         // Listen for Completion
-        .then((res)=>{
+        .then((result)=>{
             // Update state variable
-            this.setState({ projects: res.data})
+            this.setState({ projects: result.data})
         })
         // Listen for Error
         .catch((error) => {
@@ -40,8 +40,9 @@ export class View extends Component{
         //return HTML
         return (
             <div>
-                <Project listProjects={this.state.projects} ReloadPage={this.RefreshInfo}></Project>
                 <CreateProjectPopup/>
+                <br/>
+                <Project projects={this.state.projects} ReloadPage={this.RefreshInfo}></Project>
             </div>
         )
     }

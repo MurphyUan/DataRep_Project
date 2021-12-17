@@ -6,7 +6,7 @@ export class Project extends Component {
     // Render Method
     render(){
         // Return All Projects from props state
-        return this.props.listProjects.map((element) => {
+        return this.props.projects.map((element) => {
             // Map each element to a new Project Card
             return (
                 <div>

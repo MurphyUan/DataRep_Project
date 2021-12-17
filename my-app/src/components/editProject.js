@@ -5,16 +5,16 @@ import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 
 // Edit Existing Project
-export function EditProjectPopup(){
+export function EditProjectPopup(props){
     // Variable declaration
     const [open, setOpen] = useState(false)
     const [name, setName] = useState('')
 
     useEffect(() => {
         // Log Task
-        console.log("Editing: " + this.props.project.id)
+        console.log("Editing: " + props.id)
         // Get Project Details
-        axios.get('http://localhost:4000/projects/' + this.props.project.id)
+        axios.get('http://localhost:4000/projects/' + props.id)
             // Listen for completion
             .then((result) => {
                 // Log Result
@@ -32,13 +32,13 @@ export function EditProjectPopup(){
     // Update Project expression
     const updateData = () => {
         // Log Task
-        console.log("Finished Editing: " + this.props.project.id)
+        console.log("Finished Editing: " + props.id)
         // Edit Object
         const projectEdit = {
             name: name
         }
         // Send Project details to MongoDB server to be updated
-        axios.put('http://localhost:4000/projects/' + this.props.project.id, projectEdit)
+        axios.put('http://localhost:4000/projects/' + props.id, projectEdit)
             // Listen for completion
             .then((result) => {
                 // Log Result
@@ -55,10 +55,10 @@ export function EditProjectPopup(){
         // General Div
         <div className='App'>
             {/* PlaceHolder Button */}
-            <Button variant='outline-success' onClick={() => {
+            <h4 onClick={() => {
                 setOpen(true)
-                }}> Edit 
-            </Button>
+                }}> Edit Project
+            </h4>
             {/* Popup */}
             <Popup open={open} closeOnDocumentClick onClose={closePopup}>
                 {/* Form */}

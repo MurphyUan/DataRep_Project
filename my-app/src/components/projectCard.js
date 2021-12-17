@@ -12,10 +12,10 @@ export class ProjectCard extends Component{
         this.DeleteProject = this.DeleteProject.bind(this)
     }
 
-    DeleteProject(e){
-        e.preventDefault()
-        console.log("Delete "+this.props.card._id)
-
+    DeleteProject(){
+        // Log Action
+        console.log("Delete " + this.props.card._id)
+        // Attempt Delete Action
         axios.delete("http://localhost:4000/projects/" + this.props.card._id)
             // Listen for completion
             .then(()=>{
@@ -40,7 +40,7 @@ export class ProjectCard extends Component{
                             <b>{this.props.card.name}</b>
                         </Card.Header>  
                         {/* React Routing with Edit Button*/}
-                        <Link to={"/projects/" + this.props.card._id}>
+                        <Link to={{pathname: "/projects/" + this.props.card._id, project: this.props.card.name}}>
                             <Button variant='outline-success'>
                                 View
                             </Button>

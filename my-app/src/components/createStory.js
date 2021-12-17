@@ -4,76 +4,75 @@ import Popup from 'reactjs-popup'
 import Button from 'react-bootstrap/Button'
 import axios from 'axios'
 
-// Edit Story Popup Hook
-export function EditStoryPopup(props){
+// Create Story Function
+export function CreateStoryPopup(props){
+    // React Hooks
     const [open, setOpen] = useState(false)
-    const [story, setStory] = useState(props.card.name)
-    const [score, setScore] = useState(props.card.score)
+    const [story, setStory] = useState('')
+    const [score, setScore] = useState(0)
+    const [pId, setPId] = useState(props.id)
+    const [column, setColumn] = useState('col1')
 
-    // Close Popup lambda expression
+    // Closes popup
     const closePopup = () => setOpen(false)
-    // Update Data lambda expression
-    const updateData = () => {
-        // Log Process
-        console.log("Updating:" + props.card._id)
-        // Edit Object
-        const storyEdit = {
+    // Exports Data to MongoDB
+    const exportData = () => {
+        // New Object for export
+        const newStory = {
             story: story,
-            score: score
+            score: score,
+            column: column,
+            pId: pId
         }
-        // Call Update Function from localhost server
-        axios.put('http://localhost:4000/stories/' + props.card._id, storyEdit)
+        // Export Object to Server
+        axios.post('http://localhost:4000/stories/add',newStory)
             // Listen for Completion
             .then((result) => {
-                // Log Result
+                // Log action
                 console.log(result)
             })
-            // Listen for Error
+            // Listen for Errors
             .catch((error) => {
-                // Log Error
                 console.log(error)
             })
     }
-
+        
     return(
         // General Div
-        <div>
+        <div className='App'>
             {/* PlaceHolder Button */}
             <Button variant='outline-success' onClick={() => {
                 setOpen(true)
-                }}> Edit 
+                }}> Add New Story
             </Button>
             {/* Popup */}
-            <Popup open={open} closeOnDocumentClick onClose={()=>{
-                props.ReloadData()
-                closePopup()
-            }
-                }>
+            <Popup open={open} closeOnDocumentClick onClose={closePopup}>
                 {/* Form */}
                 <form onSubmit={() =>{
                     // Create New Project
-                    updateData()
+                    exportData()
                     // Close Popup
                     closePopup()
                 }} >
-                    {/* Story Input Form */}
+                    {/* Name Input Form */}
                     <div className='d-flex justify-content-center'>
                         {/* Label */}
-                        <h4>Story</h4>
+                        <h4>Story Text</h4>
                     </div>
-                    {/* Story Input */}
+                    {/* Name Input */}
                     <input type='text'
                             className='form-control'
                             value={story}
                             onChange={(element) => {
                                 setStory(element.target.value)
                             }}/>
-                    {/* Score Input Form */}
+                    <br/>
+                    {/* Name Input Form */}
                     <div className='d-flex justify-content-center'>
                         {/* Label */}
                         <h4>Score</h4>
                     </div>
-                    {/* Score Input */}
+                    {/* Name Input */}
                     <input type='text'
                             className='form-control'
                             value={score}
@@ -83,7 +82,7 @@ export function EditStoryPopup(props){
                     <br/>
                     <div className='d-flex justify-content-center'>
                         {/* Form Submission */}
-                        <Button variant="outline-success" type='submit'> Edit </Button>
+                        <Button variant="outline-success" type='submit'> Add</Button>
                         {/* Cancel Button */}
                         <Button variant="outline-danger" onClick={closePopup}> Cancel </Button>
                     </div>

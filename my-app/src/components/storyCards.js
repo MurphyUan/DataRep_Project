@@ -1,40 +1,51 @@
 // Import local dependencies
-import React from 'react'
-import { Card, Button } from 'react-bootstrap'
+import React, { Component } from 'react'
+import { Card, Button, Alert } from 'react-bootstrap'
 import axios from 'axios'
 import { EditStoryPopup } from './editStory'
 
-export function StoryCard(){
-    const deleteCard = () => {
+export class StoryCard extends Component{
+    constructor(){
+        super()
+        // Bind Methods
+        this.DeleteStory = this.DeleteStory.bind(this)
+    }
+    DeleteStory(){
+        // Log Action
         console.log("Delete: " + this.props.card._id)
-
-        axios.delete("http://localhost:4000/story/" + this.props.card_id)
+        // Attempt Delete Action
+        axios.delete("http://localhost:4000/stories/" + this.props.card._id)
+            // Listen for completion
             .then((result) => {
+                // Log resulting data
                 console.log(result)
+                // Reload Page
                 this.props.ReloadData()
             })
+            // Listen for Errors
             .catch((error) => {
+                // Log Error
                 console.log(error)
             })
     }
-
-    return(
-        <div className='d-flex justify-content-center'>
-            <Card style={{ width: '20rem'}} bg='dark' text='light'> 
-                    <Card.Body>
-                        {/* Project Name, Edit Link and Delete Button inline */}
-                        <Card.Header>
-                            <b>{this.props.card.name}</b>
-                        </Card.Header>  
-                        {/* React Routing with Edit Button*/}
-                        <EditStoryPopup card={this.props.card}/>
-                        {/* Alert & Delete Button*/}
-                        <Button onClick={deleteCard()}
-                            variant='outline-danger'>
-                            Delete
-                        </Button>             
-                    </Card.Body>
-                </Card>
-        </div>
-    )
+    // Render Method
+    render(){
+        return(
+            // Styling Div
+            <div className='d-flex justify-content-center'>
+                {/* Story Displayed As Alert */}
+                <Alert variant="dark" onClose={this.DeleteStory} dismissible>
+                    <Alert.Heading>
+                        {this.props.card.name}
+                    </Alert.Heading>
+                    <hr/>
+                    <div className='d-flex justifycontent start'>
+                        <EditStoryPopup card={this.props.card} ReloadData={this.props.ReloadData}/>
+                    </div>
+                    
+                </Alert>
+            </div>
+        )
+    }
+    
 }
