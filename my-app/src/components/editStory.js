@@ -18,7 +18,7 @@ export function EditStoryPopup(props){
         console.log("Updating:" + props.card._id)
         // Edit Object
         const storyEdit = {
-            story: story,
+            name: story,
             score: score
         }
         // Call Update Function from localhost server

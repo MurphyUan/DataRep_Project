@@ -13,6 +13,7 @@ export class Welcome extends Component{
                 <p>
                     This is my attempt on creating an application similar to Jira Boards,<br/>
                     The User can create new Projects and new Stories,<br/>
+                    The User can also edit them By Clicking On The Project Title in the View Screen
                     These creations can also be deleted.<br/>
                     <br/>
                     My Hope was to build drag and drop boards to schedule timelines and display their data,<br/>

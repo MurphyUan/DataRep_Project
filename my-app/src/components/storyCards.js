@@ -35,11 +35,13 @@ export class StoryCard extends Component{
             <div className='d-flex justify-content-center'>
                 {/* Story Displayed As Alert */}
                 <Alert variant="dark" onClose={this.DeleteStory} dismissible>
-                    <Alert.Heading>
-                        {this.props.card.name}
-                    </Alert.Heading>
-                    <hr/>
-                    <div className='d-flex justifycontent start'>
+                    <div className='d-flex justify-content-start'>
+                        <h6>Name: {this.props.card.name}</h6>
+                    </div>
+                    <div className='d-flex justify-content-start'>
+                        <h6>Score: {this.props.card.score}</h6>
+                    </div>
+                    <div className='d-flex justify-content-center'>
                         <EditStoryPopup card={this.props.card} ReloadData={this.props.ReloadData}/>
                     </div>
                     

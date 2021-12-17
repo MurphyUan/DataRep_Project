@@ -8,37 +8,20 @@ import axios from 'axios'
 export function EditProjectPopup(props){
     // Variable declaration
     const [open, setOpen] = useState(false)
-    const [name, setName] = useState('')
+    const [name, setName] = useState(props.name + "")
 
-    useEffect(() => {
-        // Log Task
-        console.log("Editing: " + props.id)
-        // Get Project Details
-        axios.get('http://localhost:4000/projects/' + props.id)
-            // Listen for completion
-            .then((result) => {
-                // Log Result
-                console.log(result.data)
-                setName(result.data.name)
-            })
-            // Listen for error
-            .catch((error) => {
-                // Log Error
-                console.log(error)
-            })
-    })
     // Close Popup expression
     const closePopup = () => setOpen(false)
     // Update Project expression
     const updateData = () => {
         // Log Task
-        console.log("Finished Editing: " + props.id)
+        console.log("Finished Editing: " + props._id)
         // Edit Object
         const projectEdit = {
             name: name
         }
         // Send Project details to MongoDB server to be updated
-        axios.put('http://localhost:4000/projects/' + props.id, projectEdit)
+        axios.put('http://localhost:4000/projects/' + props._id, projectEdit)
             // Listen for completion
             .then((result) => {
                 // Log Result
@@ -57,7 +40,7 @@ export function EditProjectPopup(props){
             {/* PlaceHolder Button */}
             <h4 onClick={() => {
                 setOpen(true)
-                }}> Edit Project
+                }}> {props.name}
             </h4>
             {/* Popup */}
             <Popup open={open} closeOnDocumentClick onClose={closePopup}>
@@ -80,14 +63,9 @@ export function EditProjectPopup(props){
                             onChange={(element) => {
                                 setName(element.target.value)
                             }}/>
-                    {/* Score Input Form */}
-                    <div className='d-flex justify-content-center'>
-                        {/* Label */}
-                        <h4>Score</h4>
-                    </div>
                     <div className='d-flex justify-content-center'>
                         {/* Form Submission */}
-                        <Button variant="outline-success" type='submit'> Add</Button>
+                        <Button variant="outline-success" type='submit'> Edit</Button>
                         {/* Cancel Button */}
                         <Button variant="outline-danger" onClick={closePopup}> Cancel </Button>
                     </div>

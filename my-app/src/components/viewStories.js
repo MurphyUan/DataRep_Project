@@ -11,21 +11,22 @@ export class ViewStories extends Component{
         super()
         // Bind Method to Class
         this.ReloadData = this.ReloadData.bind(this)
-        this.savedState = ''
+        this.GetProjectDetails = this.GetProjectDetails.bind(this)
     }
 
     // New State Variable
     state = {
         stories: [],
+        id: '',
+        name: ''
     }
 
     // Listen For Change / Connection
     componentDidMount(){
         this.ReloadData()
+        this.GetProjectDetails()
     }
 
-    Run = () => {
-    }
 
     // Refresh Page
     ReloadData(){
@@ -51,10 +52,26 @@ export class ViewStories extends Component{
             })
     }
 
+    GetProjectDetails(){
+        axios.get('http://localhost:4000/projects/' + this.props.match.params.id)
+            // Listen for Completion
+            .then((result) => {
+                console.log(result.data)
+                this.setState({
+                    id: result.data._id,
+                    name: result.data.name
+                })
+            })
+            // Log Errors
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
     render(){
         return(
             <div>
-                <EditProjectPopup id={this.props.match.params.id} project={this.props.location.project}/>
+                <EditProjectPopup _id={this.state.id} name={this.state.name}/>
                 <CreateStoryPopup id={this.props.match.params.id}/>
                 <br/>
                 <Story stories={this.state.stories} ReloadData={this.ReloadData}/>
