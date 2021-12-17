@@ -29,7 +29,7 @@ function App() {
         {/* Routing */}
         <Switch>
           <Route path="/" exact><Welcome/></Route>
-          <Route path={"/projects/:id"} component={ViewStories}></Route>
+          <Route path={"/view/:id"} component={ViewStories}></Route>
           <Route path="/view"><View/></Route>
         </Switch>
       </Router>

@@ -176,7 +176,7 @@ app.delete('/projects/:id', (req, res) => {
         // Log Error
         if(error)console.log(error)
         // Send Information
-        res.send(result)
+        console.log(result)
     })
     // Delete Project
     projectModel.findByIdAndDelete(req.params.id, (error, result) => {

@@ -21,7 +21,7 @@ export class Welcome extends Component{
                     I do hope that you enjoy my attempt
                 </p>
                 
-                <Link to={'/projects'}>
+                <Link to={'/view'}>
                     <Button variant='outline-success'>Go to Project's HomePage</Button>
                 </Link>
                 <br/>

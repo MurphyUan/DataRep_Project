@@ -8,7 +8,7 @@ import axios from 'axios'
 export function EditProjectPopup(props){
     // Variable declaration
     const [open, setOpen] = useState(false)
-    const [name, setName] = useState(props.name + "")
+    const [name, setName] = useState(`${props.name}`)
 
     // Close Popup expression
     const closePopup = () => setOpen(false)
