@@ -20,7 +20,7 @@ function App() {
           <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className='me-auto'>
-              <Nav.Link href="/projects">View Projects</Nav.Link>
+              <Nav.Link href="/view">View Projects</Nav.Link>
             </Nav>
           </Navbar.Collapse>
           </Container>
@@ -30,7 +30,7 @@ function App() {
         <Switch>
           <Route path="/" exact><Welcome/></Route>
           <Route path={"/projects/:id"} component={ViewStories}></Route>
-          <Route path="/projects"><View/></Route>
+          <Route path="/view"><View/></Route>
         </Switch>
       </Router>
       <footer>&copy;G00385338</footer>

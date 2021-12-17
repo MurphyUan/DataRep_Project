@@ -11,8 +11,8 @@ const app = express()
 const port = 4000
 
 // Allow Server to Run Client & Server at the same time
-// app.use(express.static(path.join(__dirname, '../build')));
-// app.use('/static', express.static(path.join(__dirname, 'build//static')));
+app.use(express.static(path.join(__dirname, '../build')));
+app.use('/static', express.static(path.join(__dirname, 'build//static')));
 
 // Project Schema, Format MongoDB information
 const projectSchema = new mongoose.Schema({
@@ -40,21 +40,15 @@ app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
 
 // Use Cross-Origin Resource Sharing
-app.use(cors())
+// app.use(cors())
 
-// Avoid CORS Errors when communicating between web applications
-app.use((req, res, next)=>{
-    res.header("Access-Control-Allow-Origin","*")
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
-    next()
-})
-
-//Initialise Server to Listen @ localhost:port
-app.listen(port, ()=>{
-    // Log Action
-    console.log(`Server Initialised @ http://localhost:${port}`)
-})
+// // Avoid CORS Errors when communicating between web applications
+// app.use((req, res, next)=>{
+//     res.header("Access-Control-Allow-Origin","*")
+//     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+//     next()
+// })
 
 //Connect to MongoDB Server through Mongoose
 async function connect(){
@@ -194,6 +188,12 @@ app.delete('/projects/:id', (req, res) => {
 })
 
 // Default File Location, Displays @ localhost:port
-// app.get('*', (req,res) =>{
-//     res.sendFile(path.join(__dirname+'/../build/index.html'));
-// });
+app.get('*', (req,res) =>{
+    res.sendFile(path.join(__dirname+'/../build/index.html'));
+});
+
+//Initialise Server to Listen @ localhost:port
+app.listen(port, ()=>{
+    // Log Action
+    console.log(`Server Initialised @ http://localhost:${port}`)
+})
