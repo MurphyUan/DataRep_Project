@@ -38,10 +38,9 @@ export function EditProjectPopup(props){
         // General Div
         <div className='App'>
             {/* PlaceHolder Button */}
-            <h4 onClick={() => {
+            <Button variant='outline-success' onClick={() => {
                 setOpen(true)
-                }}> {props.name}
-            </h4>
+            }}><h4>{props.name}</h4></Button>
             {/* Popup */}
             <Popup open={open} closeOnDocumentClick onClose={closePopup}>
                 {/* Form */}

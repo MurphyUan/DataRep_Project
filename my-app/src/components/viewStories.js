@@ -76,6 +76,7 @@ export class ViewStories extends Component{
             <div>
                 {/* Edit Screen For Project */}
                 <EditProjectPopup _id={this.state.id} name={this.state.name}/>
+                <br/>
                 {/* Add New Story Screen */}
                 <CreateStoryPopup id={this.props.match.params.id}/>
                 <br/>

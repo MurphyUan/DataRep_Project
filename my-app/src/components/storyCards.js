@@ -1,5 +1,6 @@
 // Import local dependencies
 import React, { Component } from 'react'
+import { Alert } from 'react-bootstrap'
 import axios from 'axios'
 import { EditStoryPopup } from './editStory'
 
